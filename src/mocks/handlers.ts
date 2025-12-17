@@ -13,21 +13,25 @@ export const handlers = [
       nodes: [
         {
           id: '1',
-          position: { x: 100, y: 100 },
-          data: { label: 'Postgres', status: 'Healthy', cpu: 40 },
-          type: 'default'
+          type: 'service',
+          position: { x: 200, y: 120 },
+          data: { 
+            label: 'Postgres', 
+            status: 'Healthy', 
+            cpu: 40 
+          }
         },
         {
           id: '2',
-          position: { x: 300, y: 200 },
-          data: { label: 'Redis', status: 'Down', cpu: 70 },
-          type: 'default'
+          type: 'service',
+          position: { x: 520, y: 260 },
+          data: { label: 'Redis', status: 'Down', cpu: 75 }
         },
         {
           id: '3',
-          position: { x: 500, y: 100 },
-          data: { label: 'MongoDB', status: 'Degraded', cpu: 55 },
-          type: 'default'
+          type: 'service',
+          position: { x: 860, y: 120 },
+          data: { label: 'MongoDB', status: 'Degraded', cpu: 55 }
         }
       ],
       edges: [

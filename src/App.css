@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.react-flow__pane {
+  background:
+    radial-gradient(circle at 1px 1px, #1f1f1f 1px, transparent 0);
+  background-size: 24px 24px;
+}
