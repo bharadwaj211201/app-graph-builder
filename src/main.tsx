@@ -5,7 +5,10 @@ import App from './App';
 import './index.css';
 
 import { worker } from './mocks/browser';
-worker.start();
+
+if (import.meta.env.DEV) {
+  worker.start();
+}
 
 const queryClient = new QueryClient();
 
