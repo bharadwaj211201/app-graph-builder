@@ -348,21 +348,21 @@ export default function App() {
   ------------------------------ */
   return (
     <ReactFlowProvider>
-      <div className="flex h-screen bg-neutral-950 text-white">
+      <div className="w-screen h-screen flex bg-neutral-950 text-white overflow-hidden">
         {/* -----------------------------
           Left Rail
         ------------------------------ */}
-        <aside className="w-14 border-r border-neutral-800 flex flex-col items-center py-4">
+        <aside className="w-14 shrink-0 border-r border-neutral-800 flex flex-col items-center py-4">
           <span className="text-lg font-bold">⚡</span>
         </aside>
 
         {/* -----------------------------
           Main Area
         ------------------------------ */}
-        <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col min-w-0">
           {/* Top Bar */}
-          <header className="h-12 border-b border-neutral-800 flex items-center justify-between px-4">
-            <h1 className="font-semibold">App Graph Builder</h1>
+          <header className="h-14 shrink-0 border-b border-neutral-800 flex items-center justify-between px-4">
+            <h1 className="text-lg font-semibold">App Graph Builder</h1>
 
             <button
               onClick={toggleMobilePanel}
@@ -373,39 +373,39 @@ export default function App() {
           </header>
 
           {/* Content */}
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex flex-1 min-h-0">
             {/* -----------------------------
               Canvas
             ------------------------------ */}
-            <main className="flex-1 relative">
+            <main className="flex-1 relative min-w-0">
               <div className='h-full w-full'>
                 {graphLoading && (
                   <div className="absolute inset-0 flex items-center justify-center text-neutral-400">
                     Loading graph…
                   </div>
                 )}
-              </div>
               
 
-              {graphError && (
-                <div className="absolute inset-0 flex items-center justify-center text-red-500">
-                  Failed to load graph
-                </div>
-              )}
+                {graphError && (
+                  <div className="absolute inset-0 flex items-center justify-center text-red-500">
+                    Failed to load graph
+                  </div>
+                )}
 
-              {!graphLoading && graph && (
-                <FlowCanvas
-                  nodes={nodes}
-                  edges={edges}
-                  setNodes={setNodes}
-                />
-              )}
+                {!graphLoading && graph && (
+                  <FlowCanvas
+                    nodes={nodes}
+                    edges={edges}
+                    setNodes={setNodes}
+                  />
+                )}
+              </div>
             </main>
 
             {/* -----------------------------
               Right Panel (Desktop)
             ------------------------------ */}
-            <aside className="hidden md:flex w-96 flex-col border-l border-neutral-800 bg-neutral-950/80 backdrop-blur">
+            <aside className="hidden md:flex w-96 shrink-0 flex-col border-l border-neutral-800 bg-neutral-950/80 backdrop-blur">
               {/* Applications */}
               <div className="border-b border-neutral-800 p-3">
                 <h3 className="text-xs uppercase tracking-wider text-neutral-500 mb-3">
@@ -419,21 +419,24 @@ export default function App() {
                   <div className="text-red-500">Failed to load apps</div>
                 )}
 
-                {apps?.map((app) => (
-
-                  <button
-                    key={app.id}
-                    onClick={() => setSelectedAppId(app.id)}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
-                      selectedAppId === app.id
-                        ? 'bg-indigo-500/10 text-indigo-400'
-                        : 'hover:bg-neutral-800'
-                    }`}
-                  >
-                    <div className="h-8 w-8 rounded bg-indigo-500/20" />
-                    <span className="text-sm">{app.name}</span>
-                  </button>
-                ))}
+                {apps?.map((app) => {
+                  const selected = selectedAppId === app.id;
+                  
+                  return (
+                    <button
+                      key={app.id}
+                      onClick={() => setSelectedAppId(app.id)}
+                      className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+                        selected
+                          ? 'bg-indigo-500/10 text-indigo-400'
+                          : 'hover:bg-neutral-800'
+                      }`}
+                    >
+                      <div className="h-8 w-8 rounded bg-indigo-500/20" />
+                      <span className="text-sm">{app.name}</span>
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Inspector */}
